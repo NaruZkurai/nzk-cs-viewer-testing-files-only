@@ -21,7 +21,7 @@ Then:
 ./run-all.sh
 ```
 
-`run-all.sh` finds the viewer (`${CSVIEWER_REPO:-../nzk-cs-viewer}`), links the
+`run-all.sh` finds the viewer (`${VIEWER_REPO:-${CSVIEWER_REPO:-../nzk-cs-viewer}}`), links the
 fixture corpus into it for the duration of the run, and executes the viewer's
 own test suites plus the engine-free gate. Nothing is written into the viewer
 except temporary `tools/` symlinks that are removed on exit.

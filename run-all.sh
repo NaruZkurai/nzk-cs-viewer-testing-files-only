@@ -4,7 +4,7 @@
 set -uo pipefail
 
 HERE="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
-V3="${CSVIEWER_REPO:-$HERE/../nzk-cs-viewer}"
+V3="${VIEWER_REPO:-${CSVIEWER_REPO:-$HERE/../nzk-cs-viewer}}"
 FULL="${FULL:-0}"
 
 fail=0
@@ -30,7 +30,7 @@ cleanup() {
 }
 trap cleanup EXIT
 
-run bash -lc "cd '$V3' && cargo test --workspace"
+run bash -lc "cd '$V3' && CSVIEWER_REPO='$HERE/tools/fixtures/projects' cargo test --workspace"
 run bash -lc "cd '$V3/nzk_ui' && cargo test"
 run bash "$V3/tools/check-engine-free.sh"
 
