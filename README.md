@@ -35,7 +35,8 @@ FULL=1 ./run-all.sh        # also run the state-test harness
 
 ```
 tools/fixtures/            real C# project corpora used by the host tests
-tools/state tests, A/B + pixel probes, text/UI probes, corpora
+tools/                     state tests, A/B + pixel probes, text/UI probes, corpora
+nzk_ui-tests/              the nzk_ui <-> host wire integration test
 nzk_ui-tools/              DOM/box/proof probes for the nzk_ui rasteriser
 reference/frontend-static/ the v2 JS the DOM builders mirror (read-only oracle)
 evidence/                  captured proof from rounds (screenshots, JSON, TSV)

@@ -16,6 +16,8 @@ run() { say "$*"; "$@" || fail=1; }
 # The host's fixture tests look for ../tools/fixtures; link them in for the run.
 mkdir -p "$V3/tools"
 ln -sfn "$HERE/tools/fixtures" "$V3/tools/fixtures"
+mkdir -p "$V3/nzk_ui/tests"
+ln -sfn "$HERE/nzk_ui-tests/nzk_ui_wire.rs" "$V3/nzk_ui/tests/nzk_ui_wire.rs"
 ln -sfn "$HERE/tools/check-engine-free.sh" "$V3/tools/check-engine-free.sh"
 ln -sfn "$HERE/tools/run-state-tests.sh" "$V3/tools/run-state-tests.sh"
 ln -sfn "$HERE/tools/README-state-tests.md" "$V3/tools/README-state-tests.md"
@@ -23,6 +25,8 @@ cleanup() {
   rm -f "$V3/tools/fixtures" "$V3/tools/check-engine-free.sh" \
         "$V3/tools/run-state-tests.sh" "$V3/tools/README-state-tests.md"
   rmdir "$V3/tools" 2>/dev/null || true
+  rm -f "$V3/nzk_ui/tests/nzk_ui_wire.rs"
+  rmdir "$V3/nzk_ui/tests" 2>/dev/null || true
 }
 trap cleanup EXIT
 
