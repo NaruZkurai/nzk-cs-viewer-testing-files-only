@@ -14,6 +14,14 @@ run() { say "$*"; "$@" || fail=1; }
 [ -f "$V3/Cargo.toml" ] || { echo "not a nzk-cs-viewer checkout: $V3" >&2; exit 2; }
 
 # The host's fixture tests look for ../tools/fixtures; link them in for the run.
+LIVE_CORPUS="$(mktemp -d "${TMPDIR:-/tmp}/nzkcs-live.XXXXXX")" || exit 2
+cat > "$LIVE_CORPUS/C.cs" <<'CS'
+namespace LiveTest {
+  public class C {
+    public int F() { return 1; }
+  }
+}
+CS
 mkdir -p "$V3/tools"
 ln -sfn "$HERE/tools/fixtures" "$V3/tools/fixtures"
 mkdir -p "$V3/nzk_ui/tests"
@@ -27,10 +35,11 @@ cleanup() {
   rmdir "$V3/tools" 2>/dev/null || true
   rm -f "$V3/nzk_ui/tests/nzk_ui_wire.rs"
   rmdir "$V3/nzk_ui/tests" 2>/dev/null || true
+  rm -rf "$LIVE_CORPUS"
 }
 trap cleanup EXIT
 
-run bash -lc "cd '$V3' && CSVIEWER_REPO='$HERE/tools/fixtures/projects' cargo test --workspace"
+run bash -lc "cd '$V3' && CSVIEWER_REPO='$LIVE_CORPUS' cargo test --workspace"
 run bash -lc "cd '$V3/nzk_ui' && cargo test"
 run bash "$V3/tools/check-engine-free.sh"
 
