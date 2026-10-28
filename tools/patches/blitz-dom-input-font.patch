@@ -1,0 +1,22 @@
+--- vendor/blitz-dom/src/layout/construct.rs
++++ vendor/blitz-dom/src/layout/construct.rs
+@@ -547,7 +547,19 @@
+         editor.set_width(None);
+ 
+         let styles = editor.edit_styles();
++        // csgraph r32: the editor's default style used to inherit only size,
++        // line-height and brush, so an author `font-family` (e.g. the
++        // `.text-input { font-family: var(--mono) }` rule) never reached the
++        // input's text layout: every text field shaped with Parley's default
++        // sans face (12px mono in Chromium = 7.2px advance, fork measured
++        // ~6.6px). Propagate the full computed font style instead.
++        styles.insert(StyleProperty::FontStack(parley_style.font_stack.clone()));
+         styles.insert(StyleProperty::FontSize(parley_style.font_size));
++        styles.insert(StyleProperty::FontWidth(parley_style.font_width));
++        styles.insert(StyleProperty::FontStyle(parley_style.font_style));
++        styles.insert(StyleProperty::FontWeight(parley_style.font_weight));
++        styles.insert(StyleProperty::LetterSpacing(parley_style.letter_spacing));
++        styles.insert(StyleProperty::WordSpacing(parley_style.word_spacing));
+         styles.insert(StyleProperty::LineHeight(parley_style.line_height));
+         styles.insert(StyleProperty::Brush(parley_style.brush));
+ 

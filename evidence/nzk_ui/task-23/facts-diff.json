@@ -1,0 +1,98 @@
+{
+  "before": {
+    "repo": "/tmp/fid-dense",
+    "status_override": null,
+    "kinds": [
+      [
+        "method",
+        60
+      ],
+      [
+        "class",
+        20
+      ],
+      [
+        "namespace",
+        10
+      ]
+    ],
+    "ns_count": 10,
+    "indexed": true,
+    "file_count": 18,
+    "parse_ms": 63,
+    "node_count": 90,
+    "edge_count": 84,
+    "projects_empty_text": "no .sln/.csproj found",
+    "parser_warning_count": 0,
+    "nodes_in_view": 18,
+    "projects": [],
+    "warnings": [],
+    "ui": {
+      "collapsed": [
+        "pubSection",
+        "strSection",
+        "chainSection"
+      ],
+      "active_mode": "graph"
+    }
+  },
+  "after": {
+    "repo": "/tmp/fid-dense",
+    "status_override": null,
+    "kinds": [
+      [
+        "method",
+        60
+      ],
+      [
+        "class",
+        20
+      ],
+      [
+        "namespace",
+        10
+      ]
+    ],
+    "ns_count": 10,
+    "indexed": true,
+    "file_count": 18,
+    "parse_ms": 63,
+    "node_count": 90,
+    "edge_count": 84,
+    "projects_empty_text": "no .sln/.csproj found",
+    "parser_warning_count": 0,
+    "nodes_in_view": 18,
+    "projects": [
+      {
+        "id": "p1",
+        "name": "NZK.Core.csproj",
+        "file_count": 6,
+        "path": "src/NZK.Core",
+        "targets": [
+          "net8.0"
+        ],
+        "defines": [
+          "DEBUG"
+        ]
+      }
+    ],
+    "warnings": [
+      {
+        "file": "src/A.cs",
+        "line": 12,
+        "col": 5,
+        "text": "unused variable 'x'",
+        "raw": "src/A.cs:12: warning: unused variable 'x'"
+      }
+    ],
+    "ui": {
+      "collapsed": [
+        "pubSection",
+        "strSection",
+        "chainSection",
+        "filtersSection"
+      ],
+      "active_mode": "graph"
+    }
+  }
+}

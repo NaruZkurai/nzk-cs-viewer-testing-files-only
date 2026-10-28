@@ -1,0 +1,11 @@
+--- /dev/fd/63	2026-10-18 14:31:40.037183433 -0400
++++ vendor/blitz-paint/src/text.rs	2026-10-18 14:31:15.951207491 -0400
+@@ -62,7 +62,7 @@
+                 scene.draw_glyphs(
+                     font,
+                     font_size,
+-                    true, // hint
++                    false, // hint
+                     run.normalized_coords(),
+                     Fill::NonZero,
+                     &anyrender::Paint::from(text_color),

@@ -1,0 +1,33 @@
+{
+  "repo": "/tmp/fid-corpus",
+  "status_override": "files 2  \u00b7  parse 50ms  \u00b7  nodes 9  \u00b7  edges 10",
+  "kinds": [
+    [
+      "method",
+      4
+    ],
+    [
+      "class",
+      3
+    ],
+    [
+      "namespace",
+      2
+    ]
+  ],
+  "ns_count": 2,
+  "indexed": true,
+  "file_count": 2,
+  "parse_ms": 50,
+  "node_count": 9,
+  "edge_count": 10,
+  "projects_empty_text": "no .sln/.csproj found",
+  "parser_warning_count": 0,
+  "nodes_in_view": 2,
+  "ui": {
+    "collapsed": null,
+    "active_mode": null,
+    "pane_open": false,
+    "scroll": []
+  }
+}

@@ -1,0 +1,20 @@
+## orphan proof (final, against the shipped binary)
+== 1. normal shutdown (QUIT + Drop) ==
+  PASS: no surviving css-shell --serve after 1. normal shutdown (QUIT + Drop) (after 1 x 100ms)
+== 2. host SIGKILL — no cleanup path runs ==
+  PASS: no surviving css-shell --serve after 2. host SIGKILL — no cleanup path runs (after 1 x 100ms)
+== 3. host SIGSEGV — abnormal termination ==
+  PASS: no surviving css-shell --serve after 3. host SIGSEGV — abnormal termination (after 1 x 100ms)
+== final sweep ==
+  PASS: zero css-shell --serve processes remain
+
+## multithreading evidence
+  cores: 24
+  anyrender_vello_cpu features: features = ["multithreading"]
+  peak threads in child during a frame: 9 (1 before first frame)
+  5 warm frames: wall=134ms cpu=170ms -> cpu/wall=1.26x
+## tools/ab.sh integration (guard intact, fork leg through --serve)
+  ab.sh --skip-ref --no-canvas:  fork capture OK -> evidence/d5-ab/fork-1600x1000.png 1600x1000 300303B
+  ab.sh guard fired correctly first: 'refusing to capture a stale binary' (pov.rs newer than debug bin) -> rebuilt
+  only the reference leg failed: no reference PNG because --skip-ref was used (Chromium/CDP side, unrelated to D5)
+  fork sprite re-run verbose: chrome/serve ... painted 1600x1000, screenshot 314962B

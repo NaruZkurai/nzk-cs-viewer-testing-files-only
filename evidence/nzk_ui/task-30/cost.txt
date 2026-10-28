@@ -1,0 +1,7 @@
+== 4. cost ==
+  facts-pane-closed      paint #1: 9ms total (blitz-paint commands 4ms, vello_cpu raster 4ms) paint #4: 8ms total (blitz-paint commands 3ms, vello_cpu raster 4ms) 
+  facts-pane-open        paint #1: 9ms total (blitz-paint commands 4ms, vello_cpu raster 4ms) paint #4: 9ms total (blitz-paint commands 4ms, vello_cpu raster 4ms) 
+  facts-scroll-240       paint #1: 11ms total (blitz-paint commands 5ms, vello_cpu raster 4ms) paint #4: 7ms total (blitz-paint commands 3ms, vello_cpu raster 3ms) 
+  child process (paint + boxes) wall: 61ms
+  child process (paint + boxes) wall: 60ms
+  child process (paint + boxes) wall: 59ms

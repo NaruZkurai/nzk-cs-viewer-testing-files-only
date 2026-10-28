@@ -1,0 +1,20 @@
+--- vendor/blitz-paint/src/render.rs
++++ vendor/blitz-paint/src/render.rs
+@@ -224,7 +224,16 @@
+ 
+         // TODO: allow layers with opacity to be unclipped (overflow: visible)
+         let wants_layer = should_clip | has_opacity;
+-        let clip = &cx.frame.padding_box_path();
++        // Chromium clips a text input's inner editor at its CONTENT box, not at
++        // the padding box: `#rootInput` is `padding: 0 9px; border: 1px`, so
++        // clipping at padding-box right ends the value 9px (the right padding)
++        // too far right versus the reference. Match the browser here.
++        let clip_path = if node.local_name() == "input" || node.local_name() == "textarea" {
++            cx.frame.content_box_path()
++        } else {
++            cx.frame.padding_box_path()
++        };
++        let clip = &clip_path;
+ 
+         maybe_with_layer(scene, wants_layer, opacity, cx.transform, clip, |scene| {
+             cx.draw_inset_box_shadow(scene);

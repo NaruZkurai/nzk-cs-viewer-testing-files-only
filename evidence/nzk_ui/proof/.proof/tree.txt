@@ -1,0 +1,1036 @@
+#Document 0
+  <html 1 lang="en" data-ui-theme="nzk-dark+" style="--side-w: 360px;">
+    <head 2>
+      <base 4 href="/"/>
+      <meta 6 charset="utf-8"/>
+      <meta 8 name="viewport" content="width=device-width, initial-scale=1"/>
+      <title 10>
+        #text 11: csgraph \u{2014}...
+      </title>
+      <style 13 id="csviewer-real-stylesheet">
+        #text 14: /* csgrap...
+      </style>
+      <style 15 id="css-shell-compat-shim">
+        #text 16: /* css-sh...
+      </style>
+      <style 17 id="cs-problems-style">
+        #text 18: .cs-probl...
+      </style>
+      <style 19 id="cs-hier-style">
+        #text 20: /* CSS th...
+      </style>
+      <!-- COMMENT 22 -->
+      <script 24 src="/vendor/monaco/min/vs/loader.js"/>
+      <!-- COMMENT 26 -->
+      <script 28 src="/static/tauri-shim.js"/>
+      <script 30 src="/static/core.js" defer=""/>
+      <script 32 src="/static/graph.js" defer=""/>
+      <script 34 src="/static/layout.js" defer=""/>
+      <script 36 src="/static/render.js" defer=""/>
+      <script 38 src="/static/interaction.js" defer=""/>
+      <script 40 src="/static/drawer.js" defer=""/>
+      <script 42 src="/static/search.js" defer=""/>
+      <script 44 src="/static/editor.js" defer=""/>
+      <script 46 src="/static/language.js" defer=""/>
+      <!-- COMMENT 48 -->
+      <script 50 src="/static/hover.js" defer=""/>
+      <script 52 src="/static/symbols.js" defer=""/>
+      <script 54 src="/static/semantics.js" defer=""/>
+      <script 56 src="/static/codelens.js" defer=""/>
+      <script 58 src="/static/hierarchy.js" defer=""/>
+      <script 60 src="/static/quickopen.js" defer=""/>
+      <script 62 src="/static/nav.js" defer=""/>
+      <script 64 src="/static/problems.js" defer=""/>
+      <script 66 src="/static/windows.js" defer=""/>
+      <script 68 src="/static/sync.js" defer=""/>
+      <script 70 src="/static/panewin.js" defer=""/>
+      <script 72 src="/static/source.js" defer=""/>
+      <script 74 src="/static/filters.js" defer=""/>
+      <script 76 src="/static/panels.js" defer=""/>
+      <script 78 src="/static/shell.js" defer=""/>
+      <!-- COMMENT 80 -->
+      <script 82 src="/static/scratch.js" defer=""/>
+      <script 84 src="/static/reorg.js" defer=""/>
+      <script 86 src="/static/edit.js" defer=""/>
+      <script 88 src="/static/preview.js" defer=""/>
+      <script 90 src="/static/arrange.js" defer=""/>
+      <script 92 src="/static/app.js" defer=""/>
+    </head>
+    <body 95>
+      <header 97 class="topbar">
+        <div 99 class="brand" title="csgraph — C# function relation graph">
+          <span 101 class="brand-mark"/>
+          #text 102: csgraph
+        </div>
+        <div 104 class="rootpick">
+          <label 106 class="sr-only" for="rootInput">
+            #text 107: Root fold...
+          </label>
+          <input 109 id="rootInput" class="text-input" type="text" spellcheck="false" autocomplete="off" placeholder="/absolute/path or repo-relative folder…" value="/tmp/fid-corpus" title="/tmp/fid-corpus"/>
+          <button 111 id="browseBtn" class="btn" type="button" title="Pick the folder to index — opens the folder browser">
+            #text 112: Browse
+          </button>
+          <button 114 id="indexBtn" class="btn btn-primary" type="button" title="Build the graph from the chosen folder (re-runs parsing and indexing)">
+            #text 115: Index
+          </button>
+        </div>
+        <div 118 class="searchwrap">
+          <div 120 class="mode-switch" role="tablist" aria-label="Search mode">
+            <button 122 id="modeGraph" class="mode active" type="button" role="tab" aria-selected="true" title="Graph search (/)">
+              #text 123: Graph
+            </button>
+            <button 125 id="modeFind" class="mode" type="button" role="tab" aria-selected="false" title="Find definitions, implementations and usages (f)">
+              #text 126: Find
+            </button>
+          </div>
+          <label 129 class="sr-only" for="searchInput">
+            #text 130: Search sy...
+          </label>
+          <input 132 id="searchInput" class="text-input" type="text" spellcheck="false" autocomplete="off" placeholder="Search symbols…  ( / )" role="combobox" aria-expanded="false" aria-controls="suggestions"/>
+          <div 134 id="suggestions" class="suggestions hidden" role="listbox" aria-label="Search suggestions"/>
+        </div>
+        <div 137 id="statusLine" class="status" title="files 2  ·  parse 51ms  ·  nodes 9  ·  edges 10">
+          #text 138: files 2  ...
+        </div>
+        <button 140 id="exportBtn" class="btn btn-ghost" type="button" title="Merge or split the indexed C# and download it" aria-haspopup="dialog" aria-controls="reorgModal">
+          #text 141: Export
+        </button>
+        <button 143 id="editBtn" class="btn btn-ghost" type="button" title="Run the shared edit tools: rename, qualify, select, create and patch source" aria-haspopup="dialog" aria-controls="editModal">
+          #text 144: Edit
+        </button>
+        <button 146 id="blocksBtn" class="btn btn-ghost" type="button" title="Blocks — a read-only Scratch-like view of the current document: declarations as typed-port cards, reference edges between them (b)" aria-pressed="false">
+          #text 147: Blocks
+        </button>
+        <button 149 id="previewBtn" class="btn btn-ghost" type="button" title="Preview the signatures and call sites a rename or retype would change — read-only, writes nothing" aria-haspopup="dialog" aria-controls="previewModal">
+          #text 150: Preview
+        </button>
+        <button 152 id="shortcutsBtn" class="btn btn-ghost shortcuts-btn" type="button" title="Shortcuts & settings (?)" aria-label="Shortcuts and settings" aria-haspopup="dialog" aria-controls="shortcutsModal">
+          <svg 154 class="shortcuts-gear" viewBox="0 0 24 24" width="15" height="15" aria-hidden="true" focusable="false">
+            <path 156 fill="currentColor" d="M19.14 12.94a7.07 7.07 0 0 0 0-1.88l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.61-.22l-2.39.96a7.03 7.03 0 0 0-1.62-.94l-.36-2.54a.5.5 0 0 0-.5-.42H9.61a.5.5 0 0 0-.5.42l-.36 2.54a7.03 7.03 0 0 0-1.62.94l-2.39-.96a.5.5 0 0 0-.61.22L2.21 8.84a.5.5 0 0 0 .12.64l2.03 1.58a7.07 7.07 0 0 0 0 1.88L2.33 14.52a.5.5 0 0 0-.12.64l1.92 3.32a.5.5 0 0 0 .61.22l2.39-.96a7.03 7.03 0 0 0 1.62.94l.36 2.54a.5.5 0 0 0 .5.42h3.84a.5.5 0 0 0 .5-.42l.36-2.54a7.03 7.03 0 0 0 1.62-.94l2.39.96a.5.5 0 0 0 .61-.22l1.92-3.32a.5.5 0 0 0-.12-.64Zm-7.14 2.66A3.6 3.6 0 1 1 15.6 12 3.6 3.6 0 0 1 12 15.6Z"/>
+          </svg>
+        </button>
+      </header>
+      <main 161 class="layout">
+        <section 163 id="canvasWrap" class="canvas-wrap">
+          <canvas 165 id="graph" aria-label="Function relation graph"/>
+          <div 167 id="tooltip" class="tooltip hidden" role="tooltip"/>
+          <div 169 id="emptyHint" class="empty-hint hidden"/>
+          <div 171 id="notice" class="notice">
+            #text 1029: 2 nodes i...
+          </div>
+          <div 173 class="canvas-tools">
+            <button 175 id="backBtn" class="btn btn-ghost" type="button" title="Back to the previous node (Backspace)">
+              #text 176: \u{2190} Back
+            </button>
+            <button 178 id="upBtn" class="btn btn-ghost" type="button" title="Go up to the parent (namespace / type)">
+              #text 179: \u{2191} Up
+            </button>
+            <button 181 id="zoomInBtn" class="btn btn-ghost" type="button" title="Zoom in (+)">
+              #text 182: +
+            </button>
+            <button 184 id="zoomOutBtn" class="btn btn-ghost" type="button" title="Zoom out (−)">
+              #text 185: \u{2212}
+            </button>
+            <button 187 id="fitBtn" class="btn btn-ghost" type="button" title="Fit graph to view">
+              #text 188: Fit
+            </button>
+            <button 190 id="wholeGraphBtn" class="btn btn-ghost" type="button" title="Load every namespace and its types">
+              #text 191: Full graph
+            </button>
+            <button 193 id="resettleBtn" class="btn btn-ghost" type="button" title="Re-run the FA2 + Noverlap layout (R)">
+              #text 194: Re-settle
+            </button>
+            <span 196 id="layoutState" class="layout-state"/>
+          </div>
+          <div 199 id="loading" class="loading hidden">
+            <div 201 class="spinner" aria-hidden="true"/>
+            <div 203 id="loadingText" class="loading-text">
+              #text 204: Working\u{2026}
+            </div>
+            <button 206 id="stopIndexBtn" class="btn btn-ghost" type="button" style="display:none" title="Stop the running index. The previous graph stays loaded and usable.">
+              #text 207: Stop
+            </button>
+          </div>
+          <!-- COMMENT 210 -->
+          <aside 212 id="nodeDrawer" class="drawer hidden" aria-label="Node properties and relations">
+            <div 214 class="drawer-head">
+              <span 216 id="nodeTitle" class="drawer-title">
+                #text 217: Node
+              </span>
+              <span 219 class="source-spacer"/>
+              <button 221 id="nodeCodeBtn" class="btn btn-ghost" type="button" title="Show this declaration in the source viewer (C)">
+                #text 222: { } View ...
+              </button>
+              <button 224 id="nodeDrawerClose" class="btn btn-ghost" type="button" title="Close drawer">
+                #text 225: \u{2715}
+              </button>
+            </div>
+            <div 228 id="nodeCrumbs" class="crumbs"/>
+            <div 230 class="drawer-body">
+              <section 232 class="section" id="propsSection">
+                <div 234 class="section-body" id="nodeProps"/>
+              </section>
+              <section 237 class="section" id="relationsSection">
+                <button 239 class="section-head" id="relationsHead" type="button" title="Collapse or expand the relation list for the selected node">
+                  <span 241 class="caret">
+                    #text 242: \u{25be}
+                  </span>
+                  #text 243: RELATIONS
+                  <span 244 class="scount" id="relationsCount"/>
+                </button>
+                <div 247 class="section-body" id="relationsBody" style="padding:0"/>
+              </section>
+            </div>
+          </aside>
+          <aside 252 id="findPanel" class="drawer hidden" aria-label="Find results">
+            <div 254 class="drawer-head">
+              <span 256 id="findQuery" class="find-query">
+                #text 257: Find
+              </span>
+              <span 259 id="findMeta" class="find-meta"/>
+              <button 261 id="findClose" class="btn btn-ghost" type="button" title="Leave Find mode (Esc)">
+                #text 262: \u{2715}
+              </button>
+            </div>
+            <div 265 id="findNotice" class="find-notice hidden"/>
+            <div 267 id="findResults" class="find-results"/>
+            <div 269 class="find-foot">
+              <span 271 class="find-hint">
+                #text 272: fully-qua...
+                <code 273>
+                  #text 274: NZK.Core....
+                </code>
+              </span>
+            </div>
+          </aside>
+          <!-- COMMENT 278 -->
+          <aside 280 id="blocksPanel" class="blocks-panel hidden" aria-label="Blocks — declarations and reference edges">
+            <div 282 class="blocks-head">
+              <span 284 id="blocksTitle" class="blocks-title">
+                #text 285: Blocks
+              </span>
+              <span 287 id="blocksMeta" class="blocks-meta"/>
+              <span 289 class="blocks-hint">
+                #text 290: click a b...
+              </span>
+              <button 292 id="blocksClose" class="btn btn-ghost" type="button" title="Close the Blocks panel (b)">
+                #text 293: \u{2715}
+              </button>
+            </div>
+            <div 296 id="blocksScroll" class="blocks-scroll">
+              <div 298 id="blocksStage" class="blocks-stage">
+                <svg 300 id="blocksEdges" class="blocks-edges" aria-hidden="true"/>
+                <div 302 id="blocksCards" class="blocks-cards"/>
+              </div>
+            </div>
+            <div 306 id="blocksPeek" class="blocks-peek hidden" role="tooltip">
+              <div 308 class="bp-head">
+                <span 310 id="blocksPeekKind" class="bp-kind"/>
+                <span 312 id="blocksPeekName" class="bp-name"/>
+              </div>
+              <div 315 id="blocksPeekFile" class="bp-file"/>
+              <div 317 id="blocksPeekSrc" class="bp-src">
+                #text 318: Loading s...
+              </div>
+              <div 320 id="blocksPeekRefs" class="bp-refs"/>
+            </div>
+          </aside>
+        </section>
+        <aside 325 class="side">
+          <div 1034 class="pane-grip pane-drag-head">
+            <span 1030 class="pane-grip-title">
+              #text 1031: SIDEBAR
+            </span>
+            <button 1032 class="btn btn-ghost pane-float-btn" type="button" title="Detach this pane into its own window / dock it back">
+              #text 1033: \u{2922}
+            </button>
+          </div>
+          <section 327 class="section" id="filtersSection">
+            <button 329 class="section-head" id="filtersHead" type="button" title="Collapse or expand the filter controls">
+              <span 331 class="caret">
+                #text 332: \u{25be}
+              </span>
+              #text 333: FILTERS
+              <span 334 class="scount" id="filtersCount">
+                #text 1081: 3 kinds
+              </span>
+            </button>
+            <div 337 class="section-body">
+              <div 1046 id="projectFilterBlock">
+                <div 1041 class="filter-label">
+                  #text 1042: Projects
+                  <span 1036 class="filter-actions">
+                    <button 1037 class="linkbtn" type="button" title="Show every project">
+                      #text 1038: all
+                    </button>
+                    <button 1039 class="linkbtn" type="button" title="Filter out every project">
+                      #text 1040: none
+                    </button>
+                  </span>
+                </div>
+                <div 1043 class="chips" id="projectFilters">
+                  <div 1044 class="list-empty">
+                    #text 1045: no .sln/....
+                  </div>
+                </div>
+              </div>
+              <div 339 class="filter-label">
+                #text 340: Namespace
+                <span 341 class="filter-actions">
+                  <button 343 class="linkbtn" type="button" id="nsAllBtn" title="Show every namespace">
+                    #text 344: all
+                  </button>
+                </span>
+              </div>
+              <select 348 id="nsSelect" class="select filter-ns" title="Show only one namespace at a time">
+                <option 352 value="">
+                  #text 351: All names...
+                </option>
+              </select>
+              <label 354 class="check" style="margin-top:6px">
+                <input 356 type="checkbox" id="nsDeep" checked=""/>
+                <span 358 title="On: the chosen namespace also keeps everything nested inside it
+                       (ns.subns.subsubns). Off: only what is declared directly in that
+                       one namespace — no sub-namespaces.">
+                  #text 359: Include s...
+                </span>
+              </label>
+              <div 362 class="filter-label" style="margin-top:9px">
+                #text 363: Node kinds
+                <span 364 class="filter-actions">
+                  <button 366 class="linkbtn" type="button" data-kinds="all" title="Show every node kind">
+                    #text 367: all
+                  </button>
+                  <button 369 class="linkbtn" type="button" data-kinds="none" title="Hide every node kind">
+                    #text 370: none
+                  </button>
+                </span>
+              </div>
+              <div 374 id="kindFilters">
+                <label 350 class="facet on" data-kind="method">
+                  <span 349 class="swatch" style="background:#dcdcaa"/>
+                  <span 1047 class="facet-name">
+                    #text 1048: method
+                  </span>
+                  <span 1049 class="facet-count">
+                    #text 1050: 4
+                  </span>
+                </label>
+                <label 1051 class="facet on" data-kind="class">
+                  <span 1052 class="swatch" style="background:#4ec9b0"/>
+                  <span 1053 class="facet-name">
+                    #text 1054: class
+                  </span>
+                  <span 1055 class="facet-count">
+                    #text 1056: 3
+                  </span>
+                </label>
+                <label 1057 class="facet on" data-kind="namespace">
+                  <span 1058 class="swatch" style="background:#4ec9b0"/>
+                  <span 1059 class="facet-name">
+                    #text 1060: namespace
+                  </span>
+                  <span 1061 class="facet-count">
+                    #text 1062: 2
+                  </span>
+                </label>
+              </div>
+              <div 376 class="filter-label" style="margin-top:9px">
+                #text 377: Edge kinds
+                <span 378 class="filter-actions">
+                  <button 380 class="linkbtn" type="button" data-edges="all" title="Show every edge kind">
+                    #text 381: all
+                  </button>
+                  <button 383 class="linkbtn" type="button" data-edges="none" title="Hide every edge kind">
+                    #text 384: none
+                  </button>
+                </span>
+              </div>
+              <div 388 id="edgeFilters" class="chips">
+                <span 1063 class="edgekey" data-edge="calls">
+                  <span 1064 class="bars" style="border-top-color:#c9d3e5;border-top-style:solid;border-top-width:2px"/>
+                  #text 1065: calls
+                </span>
+                <span 1066 class="edgekey" data-edge="uses">
+                  <span 1067 class="bars" style="border-top-color:#c9d3e5;border-top-style:dashed;border-top-width:2px"/>
+                  #text 1068: uses
+                </span>
+                <span 1069 class="edgekey" data-edge="assigns">
+                  <span 1070 class="bars" style="border-top-color:#c9d3e5;border-top-style:dashed;border-top-width:2px"/>
+                  #text 1071: assigns
+                </span>
+                <span 1072 class="edgekey" data-edge="constructs">
+                  <span 1073 class="bars" style="border-top-color:#c9d3e5;border-top-style:solid;border-top-width:2px"/>
+                  #text 1074: constructs
+                </span>
+                <span 1075 class="edgekey" data-edge="inherits">
+                  <span 1076 class="bars" style="border-top-color:#c9d3e5;border-top-style:solid;border-top-width:2px"/>
+                  #text 1077: inherits
+                </span>
+                <span 1078 class="edgekey" data-edge="contains">
+                  <span 1079 class="bars" style="border-top-color:#c9d3e5;border-top-style:dashed;border-top-width:2px"/>
+                  #text 1080: contains
+                </span>
+              </div>
+              <label 390 class="check" style="margin-top:9px">
+                <input 392 type="checkbox" id="hideEdgeLabels"/>
+                <span 394 title="Hides only the Calling / Uses / Assigns / Constructs /
+                       Inherits / Children text pills. Every edge kind keeps its
+                       line and its arrow — no relation is removed.">
+                  #text 395: Hide edge...
+                </span>
+              </label>
+              <div 398 class="filter-label" style="margin-top:9px">
+                #text 399: Groups
+              </div>
+              <div 401 class="chips">
+                <label 403 class="edgekey" id="kindChildWrap">
+                  <input 404 type="checkbox" id="groupChildren" checked="" hidden=""/>
+                  <span 406 class="bars" style="border-top-color:#6b7897"/>
+                  #text 407: child nod...
+                </label>
+                <label 409 class="edgekey" id="kindEdgeWrap">
+                  <input 410 type="checkbox" id="groupEdges" checked="" hidden=""/>
+                  <span 412 class="bars" style="border-top-color:#6b7897"/>
+                  #text 413: edge node...
+                </label>
+              </div>
+              <div 416 class="filter-row" style="margin-top:9px">
+                <label 418 class="check">
+                  <input 420 type="checkbox" id="hideIsolated"/>
+                  <span 422>
+                    #text 423: Hide isol...
+                  </span>
+                </label>
+                <label 426 class="check">
+                  <span 428>
+                    #text 429: Depth
+                  </span>
+                  <input 431 type="number" id="depthSelect" class="select depth-input" min="0" max="9999999" step="1" value="1" inputmode="numeric" autocomplete="off" spellcheck="false" title="Neighbourhood depth: 0 shows only the node. Type a value, click the up/down arrows, or scroll the box (Shift = ×10). Range 0–9999999."/>
+                </label>
+              </div>
+              <label 435 class="check" style="margin-top:9px">
+                <input 437 type="checkbox" id="hideChildren"/>
+                <span 439>
+                  #text 440: Hide rela...
+                </span>
+              </label>
+              <div 443 class="filter-row" style="margin-top:9px">
+                <button 445 id="resetFilters" class="btn btn-ghost" type="button" title="Restore the default filters, layout and hidden-node state">
+                  #text 446: Reset fil...
+                </button>
+                <button 448 id="pruneHidden" class="btn btn-ghost" type="button" title="Delete nodes hidden by the filters from the graph">
+                  #text 449: Remove hi...
+                </button>
+              </div>
+              <div 452 class="filter-group" style="margin-top:12px">
+                <div 454 class="filter-label">
+                  #text 455: Layout
+                </div>
+                <label 457 class="range" for="spacingRange">
+                  <span 459 class="range-name">
+                    #text 460: Spacing
+                  </span>
+                  <input 462 id="spacingRange" type="range" min="8" max="240" step="1" value="120"/>
+                  <output 464 id="spacingOut" class="range-val">
+                    #text 465: 120
+                  </output>
+                </label>
+                <label 468 class="range" for="nodeSizeRange">
+                  <span 470 class="range-name">
+                    #text 471: Node size
+                  </span>
+                  <input 473 id="nodeSizeRange" type="range" min="2" max="24" step="1" value="8"/>
+                  <output 475 id="nodeSizeOut" class="range-val">
+                    #text 476: 8
+                  </output>
+                </label>
+                <label 479 class="range" for="iterRange">
+                  <span 481 class="range-name">
+                    #text 482: Iterations
+                  </span>
+                  <input 484 id="iterRange" type="range" min="300" max="1500" step="50" value="800"/>
+                  <output 486 id="iterOut" class="range-val">
+                    #text 487: 800
+                  </output>
+                </label>
+                <label 490 class="range" for="curveRange">
+                  <span 492 class="range-name">
+                    #text 493: Edge curve
+                  </span>
+                  <input 495 id="curveRange" type="range" min="0" max="0.2" step="0.01" value="0.1"/>
+                  <output 497 id="curveOut" class="range-val">
+                    #text 498: 0.10
+                  </output>
+                </label>
+              </div>
+              <p 502 class="hint" style="margin-top:8px">
+                #text 503: Double-cl...
+              </p>
+            </div>
+          </section>
+          <section 507 class="section collapsed" id="pubSection">
+            <button 509 class="section-head" id="pubHead" type="button" title="Collapse or expand the list of public definitions">
+              <span 511 class="caret">
+                #text 512: \u{25b8}
+              </span>
+              #text 513: PUBLIC DE...
+              <span 514 class="scount" id="pubCount"/>
+            </button>
+            <div 517 class="section-body">
+              <input 519 id="pubSearch" class="mini-input" type="text" spellcheck="false" placeholder="filter public definitions…"/>
+              <div 521 id="pubList" class="listbox">
+                <div 522 class="list-empty">
+                  #text 523: open to l...
+                </div>
+              </div>
+            </div>
+          </section>
+          <section 527 class="section collapsed" id="strSection">
+            <button 529 class="section-head" id="strHead" type="button" title="Collapse or expand the string-literal search">
+              <span 531 class="caret">
+                #text 532: \u{25b8}
+              </span>
+              #text 533: STRINGS /...
+              <span 534 class="scount" id="strCount"/>
+            </button>
+            <div 537 class="section-body">
+              <input 539 id="strSearch" class="mini-input" type="text" spellcheck="false" placeholder="filter strings…"/>
+              <div 541 id="strList" class="listbox">
+                <div 542 class="list-empty">
+                  #text 543: open to l...
+                </div>
+              </div>
+            </div>
+          </section>
+          <section 547 class="section collapsed" id="chainSection">
+            <button 549 class="section-head" id="chainHead" type="button" title="Collapse or expand the resolve-chain walker">
+              <span 551 class="caret">
+                #text 552: \u{25b8}
+              </span>
+              #text 553: RESOLVE C...
+              <span 554 class="scount" id="chainCount"/>
+            </button>
+            <div 557 class="section-body">
+              <div 559 class="chain-controls">
+                <select 561 id="chainDepth" class="select">
+                  <option 563>
+                    #text 564: 1
+                  </option>
+                  <option 565>
+                    #text 566: 2
+                  </option>
+                  <option 567 selected="">
+                    #text 568: 3
+                  </option>
+                  <option 570>
+                    #text 571: 4
+                  </option>
+                  <option 572>
+                    #text 573: 5
+                  </option>
+                  <option 574>
+                    #text 575: 6
+                  </option>
+                </select>
+                <select 578 id="chainDir" class="select">
+                  <option 580 value="forward" selected="">
+                    #text 581: forward
+                  </option>
+                  <option 583 value="backward">
+                    #text 584: backward
+                  </option>
+                  <option 586 value="both">
+                    #text 587: both
+                  </option>
+                </select>
+                <button 590 id="chainRun" class="btn btn-ghost" type="button" title="Walk the resolve chain from the selected node">
+                  #text 591: Run
+                </button>
+                <button 593 id="chainFlatBtn" class="btn btn-ghost" type="button" title="Toggle flat list">
+                  #text 594: Flat
+                </button>
+              </div>
+              <div 597 id="chainTree" class="chain-tree">
+                <div 598 class="list-empty">
+                  #text 599: Select a ...
+                </div>
+              </div>
+            </div>
+          </section>
+          <section 1095 class="section" id="problemsSection">
+            <button 1082 class="section-head" id="problemsHead" type="button" title="Collapse or expand the parser warnings">
+              <span 1083 class="caret">
+                #text 1084: \u{25be}
+              </span>
+              #text 1085: PARSER WA...
+              <span 1086 class="scount" id="problemsCount">
+                #text 1087: 0
+              </span>
+            </button>
+            <div 1088 class="section-body">
+              <div 1089 class="cs-problems-note">
+                #text 1090: Parser wa...
+              </div>
+              <input 1091 class="mini-input" id="problemsSearch" type="text" spellcheck="false" placeholder="filter warnings…"/>
+              <div 1092 class="listbox tall" id="problemsList">
+                <div 1093 class="list-empty">
+                  #text 1094: No parser...
+                </div>
+              </div>
+            </div>
+          </section>
+          <div 1035 class="pane-resize" title="Resize"/>
+        </aside>
+        <section 604 id="sourcePane" class="source-pane hidden" aria-label="Source viewer">
+          <div 606 class="source-head">
+            <span 608 id="sourceTitle" class="source-title">
+              #text 609: \u{2014}
+            </span>
+            <button 611 id="srcCopyBtn" class="btn btn-ghost" type="button" title="Copy the shown code (no line numbers)">
+              #text 612: Copy code
+            </button>
+            <button 614 id="srcRefBtn" class="btn btn-ghost" type="button" title="Copy file:line">
+              #text 615: Copy ref
+            </button>
+            <span 617 class="source-spacer"/>
+            <span 619 id="sourceChipWrap" class="source-chipwrap"/>
+            <span 621 id="sourceMatchTag" class="source-matchtag hidden"/>
+            <select 623 id="sourceTheme" class="select" title="Syntax theme">
+              <option 625 value="darkplus">
+                #text 626: Dark+
+              </option>
+              <option 628 value="darkmodern">
+                #text 629: Dark Mode...
+              </option>
+              <option 631 value="monokai">
+                #text 632: Monokai
+              </option>
+              <option 634 value="solarized">
+                #text 635: Solarized...
+              </option>
+            </select>
+            <button 638 id="srcModeBtn" class="btn btn-ghost" type="button" title="Doc = every declaration site gathered into one synthesized file; Raw = the file as written">
+              #text 639: Doc
+            </button>
+            <button 641 id="srcPopBtn" class="btn btn-ghost" type="button" title="Open this document in its own window (its own thread and its own editor worker)">
+              #text 642: \u{29c9} New win...
+            </button>
+            <button 644 id="srcMethodBtn" class="btn btn-ghost" type="button" title="Show the whole declaration">
+              #text 645: Whole met...
+            </button>
+            <button 647 id="srcWindowBtn" class="btn btn-ghost" type="button" title="Show ±30 lines around the hit">
+              #text 648: Window
+            </button>
+            <button 650 id="srcPrevBtn" class="btn btn-ghost" type="button" title="Previous hit in this file">
+              #text 651: Prev
+            </button>
+            <button 653 id="srcNextBtn" class="btn btn-ghost" type="button" title="Next hit in this file">
+              #text 654: Next
+            </button>
+            <button 656 id="srcCloseBtn" class="btn btn-ghost" type="button" title="Close (Esc)">
+              #text 657: Close
+            </button>
+          </div>
+          <div 660 id="sourceBody" class="source-body"/>
+          <div 662 id="sourceNote" class="source-note"/>
+        </section>
+      </main>
+      <div 666 id="modal" class="modal-backdrop hidden" aria-hidden="true">
+        <div 668 class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+          <div 670 class="modal-head">
+            <h2 672 id="modalTitle">
+              #text 673: CHOOSE A ...
+            </h2>
+            <button 675 id="modalClose" class="btn btn-ghost" type="button" title="Close the folder browser" aria-label="Close">
+              #text 676: \u{2715}
+            </button>
+          </div>
+          <div 679 class="modal-path">
+            <label 681 class="sr-only" for="modalPathInput">
+              #text 682: Folder pa...
+            </label>
+            <input 684 id="modalPathInput" class="text-input modal-path-input" type="text" spellcheck="false" autocomplete="off" placeholder="/absolute/path or repo-relative folder…"/>
+            <button 686 id="modalGo" class="btn" type="button" title="Open this folder">
+              #text 687: Go
+            </button>
+          </div>
+          <div 690 class="modal-path">
+            <button 692 id="modalUp" class="btn btn-ghost" type="button" title="Parent folder">
+              #text 693: \u{2191} Up
+            </button>
+            <button 695 id="modalHome" class="btn btn-ghost" type="button" title="Home folder">
+              #text 696: Home
+            </button>
+            <button 698 id="modalRoot" class="btn btn-ghost" type="button" title="Filesystem root">
+              #text 699: Root /
+            </button>
+            <button 701 id="modalRepo" class="btn btn-ghost" type="button" title="Repository root">
+              #text 702: Repo
+            </button>
+            <code 704 id="modalPath" class="modal-path-text">
+              #text 705: /
+            </code>
+          </div>
+          <div 708 id="modalBody" class="modal-body"/>
+          <div 710 class="modal-foot">
+            <span 712 id="modalNote" class="modal-note"/>
+            <button 714 id="modalCancel" class="btn" type="button" title="Close without changing the indexed folder">
+              #text 715: Cancel
+            </button>
+            <button 717 id="modalSelect" class="btn btn-primary" type="button" title="Index the folder shown above" disabled="">
+              #text 718: Select th...
+            </button>
+          </div>
+        </div>
+      </div>
+      <div 723 id="shortcutsModal" class="modal-backdrop hidden" aria-hidden="true">
+        <div 725 class="modal modal-shortcuts" role="dialog" aria-modal="true" aria-labelledby="shortcutsTitle">
+          <div 727 class="modal-head">
+            <h2 729 id="shortcutsTitle">
+              #text 730: KEYBOARD ...
+            </h2>
+            <button 732 id="shortcutsClose" class="btn btn-ghost" type="button" title="Close the shortcuts and settings dialog" aria-label="Close">
+              #text 733: \u{2715}
+            </button>
+          </div>
+          <div 736 class="settings-row">
+            <label 738 class="settings-label" for="uiTheme">
+              #text 739: UI theme
+            </label>
+            <select 741 id="uiTheme" class="select" title="Whole-viewer theme: chrome and node kinds">
+              <option 743 value="nzk-dark+">
+                #text 744: nzk-dark+...
+              </option>
+              <option 746 value="dark-v1">
+                #text 747: dark v1
+              </option>
+            </select>
+          </div>
+          <div 751 id="shortcutsBody" class="modal-body shortcuts-body"/>
+          <div 753 class="modal-foot">
+            <span 755 class="modal-note">
+              #text 756: Shortcuts...
+              <kbd 757>
+                #text 758: ?
+              </kbd>
+              #text 759: to reopen...
+            </span>
+            <button 761 id="shortcutsDone" class="btn btn-primary" type="button" title="Close the shortcuts and settings dialog">
+              #text 762: Done
+            </button>
+          </div>
+        </div>
+      </div>
+      <div 767 id="toasts" class="toasts" aria-live="polite"/>
+      <div 769 id="reorgModal" class="modal-backdrop hidden" aria-hidden="true">
+        <div 771 class="modal modal-reorg" role="dialog" aria-modal="true" aria-labelledby="reorgTitle">
+          <div 773 class="modal-head">
+            <h2 775 id="reorgTitle">
+              #text 776: REORGANIS...
+            </h2>
+            <button 778 id="reorgClose" class="btn btn-ghost" type="button" title="Close the export dialog" aria-label="Close">
+              #text 779: \u{2715}
+            </button>
+          </div>
+          <div 782 class="modal-body">
+            <p 784 class="reorg-lede">
+              #text 785: Rebuild t...
+            </p>
+            <div 787 class="settings-row">
+              <label 789 class="settings-label" for="reorgMode">
+                #text 790: Output
+              </label>
+              <select 792 id="reorgMode" class="select">
+                <option 794 value="single">
+                  #text 795: One merge...
+                </option>
+                <option 797 value="split">
+                  #text 798: Split int...
+                </option>
+              </select>
+            </div>
+            <div 802 class="settings-row">
+              <label 804 class="settings-label" for="reorgScope">
+                #text 805: What to m...
+              </label>
+              <select 807 id="reorgScope" class="select">
+                <option 809 value="selection">
+                  #text 810: The graph...
+                </option>
+                <option 812 value="all">
+                  #text 813: The whole...
+                </option>
+              </select>
+            </div>
+            <div 817 class="settings-row" id="reorgGranRow">
+              <label 819 class="settings-label" for="reorgGran">
+                #text 820: Chunk unit
+              </label>
+              <select 822 id="reorgGran" class="select">
+                <option 824 value="leaf">
+                  #text 825: One decla...
+                </option>
+                <option 827 value="top">
+                  #text 828: Whole top...
+                </option>
+              </select>
+            </div>
+            <div 832 class="settings-row" id="reorgGroupRow">
+              <label 834 class="settings-label" for="reorgGroup">
+                #text 835: Grouping
+              </label>
+              <select 837 id="reorgGroup" class="select">
+                <option 839 value="size">
+                  #text 840: By size b...
+                </option>
+                <option 842 value="namespace">
+                  #text 843: By namesp...
+                </option>
+                <option 845 value="owner">
+                  #text 846: By owning...
+                </option>
+                <option 848 value="single">
+                  #text 849: Everythin...
+                </option>
+              </select>
+            </div>
+            <div 853 class="settings-row" id="reorgSizeRow">
+              <label 855 class="settings-label" for="reorgSize">
+                #text 856: Lines per...
+              </label>
+              <input 858 id="reorgSize" class="text-input" type="number" min="50" step="50" value="3000"/>
+            </div>
+            <div 861 class="settings-row">
+              <label 863 class="settings-label" for="reorgDest">
+                #text 864: Write to
+              </label>
+              <input 866 id="reorgDest" class="text-input" type="text" spellcheck="false" placeholder="absolute folder — leave empty to only download"/>
+            </div>
+            <div 869 class="settings-row">
+              <label 871 class="settings-label" for="reorgHeader">
+                #text 872: Banner co...
+              </label>
+              <input 874 id="reorgHeader" type="checkbox" checked="" title="Prefix each file with a short auto-generated comment"/>
+            </div>
+            <div 877 id="reorgReport" class="reorg-report"/>
+          </div>
+          <div 880 class="modal-foot">
+            <span 882 id="reorgNote" class="modal-note"/>
+            <button 884 id="reorgCompile" class="btn" type="button" title="Compile the source and the result with Unity's Roslyn and compare the diagnostics">
+              #text 885: Compile
+            </button>
+            <button 887 id="reorgVerify" class="btn" type="button" title="Build the output and prove every declaration and byte survives">
+              #text 888: Verify
+            </button>
+            <button 890 id="reorgWrite" class="btn" type="button" title="Write the reorganised files to the folder above">
+              #text 891: Write
+            </button>
+            <button 893 id="reorgZip" class="btn btn-primary" type="button" title="Download the reorganised source as a .zip">
+              #text 894: Download ...
+            </button>
+          </div>
+        </div>
+      </div>
+      <div 899 id="editModal" class="modal-backdrop hidden" aria-hidden="true">
+        <div 901 class="modal modal-edit" role="dialog" aria-modal="true" aria-labelledby="editTitle">
+          <div 903 class="modal-head">
+            <h2 905 id="editTitle">
+              #text 906: EDIT TOOLS
+            </h2>
+            <button 908 id="editClose" class="btn btn-ghost" type="button" title="Close the edit dialog" aria-label="Close">
+              #text 909: \u{2715}
+            </button>
+          </div>
+          <div 912 class="modal-body">
+            <p 914 class="reorg-lede">
+              #text 915: The same ...
+              <b 916>
+                #text 917: Apply
+              </b>
+              #text 918: sends
+              <code 919>
+                #text 920: apply: tr...
+              </code>
+              #text 921: .
+              <b 922>
+                #text 923: Validate
+              </b>
+              #text 924: runs the ...
+              <b 925>
+                #text 926: Duplicates
+              </b>
+              #text 927: reports r...
+            </p>
+            <div 929 class="settings-row">
+              <label 931 class="settings-label" for="editTool">
+                #text 932: Operation
+              </label>
+              <select 934 id="editTool" class="select"/>
+            </div>
+            <div 937 class="settings-row" style="align-items:flex-start">
+              <label 939 class="settings-label" for="editArgs">
+                #text 940: Args (JSO...
+              </label>
+              <textarea 942 id="editArgs" class="text-input" spellcheck="false" rows="7" style="flex:1 1 auto; min-width:0; font-family:var(--mono); font-size:11.5px; resize:vertical" placeholder="{"like": ["sps", "pcs"], "limit": 50}">
+                #text 943: {}
+              </textarea>
+            </div>
+            <pre 946 id="editOut" class="reorg-report" aria-live="polite"/>
+          </div>
+          <div 949 class="modal-foot">
+            <span 951 id="editNote" class="modal-note"/>
+            <button 953 id="editValidate" class="btn" type="button" title="Run the Roslyn parse gate over the corpus (reports a skipped reason honestly)">
+              #text 954: Validate
+            </button>
+            <button 956 id="editDedupe" class="btn" type="button" title="Report exact/near duplicate bodies and repeated blocks">
+              #text 957: Duplicates
+            </button>
+            <button 959 id="editDry" class="btn" type="button" title="Preview the plan without writing anything">
+              #text 960: Dry-run
+            </button>
+            <button 962 id="editApply" class="btn btn-primary" type="button" title="Run the tool with apply:true (write tools only)">
+              #text 963: Apply
+            </button>
+          </div>
+        </div>
+      </div>
+      <div 968 id="previewModal" class="modal-backdrop hidden" aria-hidden="true">
+        <div 970 class="modal modal-preview" role="dialog" aria-modal="true" aria-labelledby="previewTitle">
+          <div 972 class="modal-head">
+            <h2 974 id="previewTitle">
+              #text 975: CHANGE PR...
+            </h2>
+            <button 977 id="previewClose" class="btn btn-ghost" type="button" title="Close the preview dialog" aria-label="Close">
+              #text 978: \u{2715}
+            </button>
+          </div>
+          <div 981 class="modal-body">
+            <p 983 class="reorg-lede">
+              #text 984: What woul...
+              <b 985>
+                #text 986: before
+              </b>
+              #text 987: anything ...
+              <code 988>
+                #text 989: writes: []
+              </code>
+              #text 990: .
+            </p>
+            <div 992 class="settings-row">
+              <label 994 class="settings-label" for="previewSelector">
+                #text 995: Declarati...
+              </label>
+              <input 997 id="previewSelector" class="text-input" type="text" spellcheck="false" placeholder="node id, full name, or a unique simple name (defaults to the selection)"/>
+            </div>
+            <div 1000 class="settings-row">
+              <label 1002 class="settings-label" for="previewOp">
+                #text 1003: Change
+              </label>
+              <select 1005 id="previewOp" class="select"/>
+            </div>
+            <div 1008 class="settings-row">
+              <label 1010 class="settings-label" for="previewTo">
+                #text 1011: New name ...
+              </label>
+              <input 1013 id="previewTo" class="text-input" type="text" spellcheck="false" placeholder="e.g. Plus  —  or  long"/>
+            </div>
+            <div 1016 id="previewOut" class="reorg-report preview-out"/>
+          </div>
+          <div 1019 class="modal-foot">
+            <span 1021 id="previewNote" class="modal-note"/>
+            <button 1023 id="previewRun" class="btn btn-primary" type="button" title="Plan the change — read-only, writes nothing">
+              #text 1024: Preview
+            </button>
+          </div>
+        </div>
+      </div>
+      <div 1149 class="cs-hier" style="display: flex">
+        <div 1102 class="cs-hier-head">
+          <div 1096 class="cs-hier-title">
+            #text 1097: DoWork
+            <span 1098 class="cs-hier-sub">
+              #text 1099: 2 hops
+            </span>
+          </div>
+          <button 1100 class="cs-hier-btn" type="button" title="Close">
+            #text 1101: \u{2715}
+          </button>
+        </div>
+        <div 1103 class="cs-hier-controls">
+          <select 1104 class="cs-hier-select">
+            <option 1105 value="both" selected="selected">
+              #text 1106: Both
+            </option>
+            <option 1107 value="forward">
+              #text 1108: Outgoing
+            </option>
+            <option 1109 value="backward">
+              #text 1110: Incoming
+            </option>
+          </select>
+          <select 1111 class="cs-hier-select">
+            <option 1112 value="1">
+              #text 1113: depth 1
+            </option>
+            <option 1114 value="2" selected="selected">
+              #text 1115: depth 2
+            </option>
+          </select>
+        </div>
+        <div 1116 class="cs-hier-body">
+          <div 1117 class="cs-hier-section">
+            #text 1118: Outgoing ...
+          </div>
+          <div 1126 class="hop-wrap call">
+            <button 1119 class="hop" type="button" style="padding-left: 8px">
+              <span 1120 class="hop-caret">
+                #text 1121: \u{25be}
+              </span>
+              <span 1122 class="hop-label">
+                #text 1123: DoWork
+              </span>
+              <span 1124 class="cs-hier-kind">
+                #text 1125: method
+              </span>
+            </button>
+          </div>
+          <div 1136 class="hop-wrap call">
+            <button 1127 class="hop" type="button" style="padding-left: 20px">
+              <span 1128 class="hop-caret">
+                #text 1129: \u{b7}
+              </span>
+              <span 1130 class="hop-edge">
+                #text 1131: calls
+              </span>
+              <span 1132 class="hop-label">
+                #text 1133: Helper
+              </span>
+              <span 1134 class="cs-hier-kind">
+                #text 1135: method
+              </span>
+            </button>
+          </div>
+          <div 1137 class="cs-hier-section">
+            #text 1138: Incoming ...
+          </div>
+          <div 1148 class="hop-wrap call">
+            <button 1139 class="hop" type="button" style="padding-left: 8px">
+              <span 1140 class="hop-caret">
+                #text 1141: \u{b7}
+              </span>
+              <span 1142 class="hop-edge">
+                #text 1143: calls
+              </span>
+              <span 1144 class="hop-label">
+                #text 1145: Run
+              </span>
+              <span 1146 class="cs-hier-kind">
+                #text 1147: method
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </body>
+  </html>

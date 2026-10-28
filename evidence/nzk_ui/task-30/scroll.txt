@@ -1,0 +1,7 @@
+== 2. sidebar scroll ==
+  offset 0   : @scroll	.side	0.00	0.00	0.00	311.00
+  offset 240 : @scroll	.side	0.00	240.00	0.00	311.00
+  pixels changed by the scroll: 113785
+  bbox x 1241..1599  y 52..659
+  sidebar box is x 1240..1600, y 52..660 -> the change is confined to it
+  pixels changed inside the source-pane row (y>=660): 0

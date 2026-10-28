@@ -1,0 +1,2 @@
+== 3. region hit-test (via the app's chrome::region_at test) ==
+  covered by cargo test --offline --bin native-csviewer dispatch_tests::pane_open_grid_scroll_and_region_hit_test

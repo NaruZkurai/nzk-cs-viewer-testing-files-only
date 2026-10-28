@@ -1,0 +1,19 @@
+== 1. pane-open grid geometry ==
+--- pane CLOSED (shipped document) ---
+.layout	0.00	52.00	1600.00	948.00
+#canvasWrap	0.00	52.00	1240.00	948.00
+#graph	0.00	52.00	1240.00	948.00
+.side	1240.00	52.00	360.00	948.00
+.side .pane-float-btn	1570.00	56.00	22.00	20.00
+.side .pane-resize	1584.00	984.00	16.00	16.00
+#sourcePane	0.00	52.00	0.00	0.00
+--- pane OPEN (.layout.with-source, [1fr, 34vh]) ---
+.layout	0.00	52.00	1600.00	948.00
+#canvasWrap	0.00	52.00	1240.00	608.00
+#graph	0.00	52.00	1240.00	608.00
+.side	1240.00	52.00	360.00	608.00
+.side .pane-float-btn	1570.00	56.00	22.00	20.00
+.side .pane-resize	1584.00	644.00	16.00	16.00
+#sourcePane	0.00	660.00	1600.00	340.00
+#sourceBody	0.00	698.00	1600.00	302.00
+.source-head	0.00	661.00	1600.00	37.00

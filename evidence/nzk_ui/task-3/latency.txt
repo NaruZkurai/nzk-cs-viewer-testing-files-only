@@ -1,0 +1,31 @@
+# D5/task-3 evidence — persistent css-shell child
+# generated 2026-10-16T10:12:50-04:00  host=82-5-3 7.2.9-1-cachyos x86_64  cores=24
+
+## css-shell selftest (SHA-256 NIST vectors + chunking)
+selftest: OK (306 checks)
+
+## cold: process -> PNG on disk, 1600x1000, real frontend
+  run1: 51ms
+  run2: 47ms
+  run3: 47ms
+  run4: 48ms
+  run5: 47ms
+
+## old app path: TWO child invocations
+  paint+boxes run1: 84ms
+  paint+boxes run2: 84ms
+  paint+boxes run3: 90ms
+
+## WebKitGTK baseline (same index.html + style.css)
+  run0: load=636ms snapshot=4ms  1600x1000
+  run1: load=576ms snapshot=8ms  1600x1000
+  run2: load=583ms snapshot=3ms  1600x1000
+
+WebKitGTK pid-per-run, 1600x1000, same index.html+style.css, n=3
+  process->load-finished : best=576ms median=583ms
+  load->snapshot(pixels) : best=3ms median=4ms
+  TOTAL first pixels     : best=580ms
+
+  NOTE: this is chrome content -> pixels under WebKitGTK, NOT the full
+  Tauri viewer (no /api/* wiring, no graph canvas). It does not include
+  the Chromium/Tauri startup that tools/ab.sh measures.
